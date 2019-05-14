@@ -74,11 +74,12 @@ function main(){
 
 			var square = this.squares.create(x, y, 'square');
             console.log(i,x,y);
-            this.square.setInteractive();
+//             this.square.setInteractive();
 
 		}
 
-	   
+	    this.input.setHitArea(squares.getChildren()).on('gameobjectdown', squareClicked );
+
 	    //  Input Events
 	    cursors = this.input.keyboard.createCursorKeys();
 
@@ -93,7 +94,7 @@ function main(){
 
 	}
     
-    onObjectClicked(ptr,obj)
+    squareClicked(ptr,obj)
     {
 //         gameObject.angle+=10;
         console.log(obj.body.x, obj.body.y, obj);
