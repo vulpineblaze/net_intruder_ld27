@@ -51,6 +51,8 @@ function main(){
 	{
 	    //  A simple background for our game
 	    this.add.image(400, 300, 'background');
+        
+        
 
 		var displayWidth = this.cameras.main.displayWidth;
 		var displayHeight = this.cameras.main.displayHeight;
@@ -72,6 +74,8 @@ function main(){
 
 			var square = this.squares.create(x, y, 'square');
             console.log(i,x,y);
+            this.square.setInteractive();
+
 		}
 
 	   
@@ -88,7 +92,12 @@ function main(){
 	{
 
 	}
-
+    
+    onObjectClicked(ptr,obj)
+    {
+//         gameObject.angle+=10;
+        console.log(obj.body.x, obj.body.y, obj);
+    }
 
 
 }
