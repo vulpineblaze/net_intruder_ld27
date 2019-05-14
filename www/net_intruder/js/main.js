@@ -68,9 +68,9 @@ function main(){
 	    // platforms.create(50, 250, 'ground');
 	    // platforms.create(750, 220, 'ground');
 
-	    // // The player and its settings
-	    player = this.physics.add.sprite(50, 50, 'player');
-	    square = this.physics.add.sprite(60, 60, 'square');
+// 	    // // The player and its settings
+// 	    player = this.physics.add.sprite(50, 50, 'player');
+// 	    square = this.physics.add.sprite(60, 60, 'square');
 	
 		var displayWidth = this.cameras.main.displayWidth;
 		var displayHeight = this.cameras.main.displayHeight;
@@ -81,6 +81,8 @@ function main(){
 		// finds the number of px on each side of play area, sans alloted openspace at top
 		var verticalOffset = ((displayHeight - verticalOpenSpace) - (squarePx * squareHeight))/2;
 		var verticalOffsetTop = verticalOpenSpace + verticalOffset;
+        
+        console.log(displayWidth,displayHeight,horizontalOffset,verticalOffset,verticalOffsetTop);
 		
 		
 		this.squares = this.physics.add.group();
@@ -89,6 +91,7 @@ function main(){
 			var y = i * squarePx + verticalOffsetTop;
 
 			var square = this.squares.create(x, y, 'square');
+            console.log(i,x,y);
 		}
 
 	    // //  Player physics properties. Give the little guy a slight bounce.
@@ -136,7 +139,7 @@ function main(){
 	    // bombs = this.physics.add.group();
 
 	    //  The score
-	    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+	    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '48px', fill: '#fff' });
 
 	    // //  Collide the player and the stars with the platforms
 	    // this.physics.add.collider(player, platforms);
