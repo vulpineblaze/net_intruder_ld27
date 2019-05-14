@@ -45,6 +45,7 @@ function main(){
 	    this.load.image('background', 'img/quick_background.png');
 	    this.load.image('player', 'img/quick_player.png');
 	    this.load.image('square', 'img/square_60px.png');
+        
 	}
 
 	function create ()
@@ -67,19 +68,44 @@ function main(){
         console.log(displayWidth,displayHeight,horizontalOffset,verticalOffset,verticalOffsetTop);
 		
 		
-		this.squares = this.physics.add.group();
+// 		this.squares = this.physics.add.group();
 		for (var i = 0; i < 9; i++) {
 			var x = i * squarePx + horizontalOffset;
 			var y = i * squarePx + verticalOffsetTop;
 
-			var square = this.squares.create(x, y, 'square');
+// 			var square = this.squares.create(x, y, 'square');
             console.log(i,x,y);
 //             this.square.setInteractive();
+            
+            var square = this.add.sprite(x,y, 'square').setInteractive();
+
 
 		}
 
-	    this.input.setHitArea(squares.getChildren()).on('gameobjectdown', squareClicked );
 
+        //  If you disable topOnly it will fire events for all objects the pointer is over
+        //  regardless of their place on the display list
+        this.input.setTopOnly(false);
+
+        //  Events
+
+        this.input.on('gameobjectdown', function (pointer, gameObject) {
+
+            gameObject.setTint(0x00ff00);
+
+        });
+
+        this.input.on('gameobjectout', function (pointer, gameObject) {
+
+            gameObject.clearTint();
+
+        });
+
+        this.input.on('gameobjectup', function (pointer, gameObject) {
+
+            gameObject.clearTint();
+
+        });
 	    //  Input Events
 	    cursors = this.input.keyboard.createCursorKeys();
 
@@ -94,7 +120,7 @@ function main(){
 
 	}
     
-    squareClicked(ptr,obj)
+    function squareClicked(ptr,obj)
     {
 //         gameObject.angle+=10;
         console.log(obj.body.x, obj.body.y, obj);
