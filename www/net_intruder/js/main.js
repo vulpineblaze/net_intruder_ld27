@@ -78,6 +78,7 @@ function main(){
 //             this.square.setInteractive();
             
             var square = this.add.sprite(x,y, 'square').setInteractive();
+            square.i = i;
 
 
 		}
@@ -92,6 +93,7 @@ function main(){
         this.input.on('gameobjectdown', function (pointer, gameObject) {
 
             gameObject.setTint(0x00ff00);
+            console.log(obj.body.x, obj.body.y, obj);
 
         });
 
@@ -123,7 +125,7 @@ function main(){
     function squareClicked(ptr,obj)
     {
 //         gameObject.angle+=10;
-        console.log(obj.body.x, obj.body.y, obj);
+        console.log(obj.i, obj.body.x, obj.body.y, obj);
     }
 
 
