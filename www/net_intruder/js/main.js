@@ -33,10 +33,32 @@ function main(){
 	var square;
 	var squares;
 	var squarePx = 60;
+	var squarePxHalf = squarePx/2;
 	var squareWidth = 9;
 	var squareHeight = 13;
 	
 	var verticalOpenSpace = 80;
+    
+    var colorPlay = {
+        Red:		"#FF0000",	
+        Maroon:		"#800000",	
+        Yellow:		"#FFFF00",	
+        Olive:		"#808000",	
+        Lime:		"#00FF00",	
+        Green:		"#008000",	
+        Aqua:		"#00FFFF",	
+        Teal:		"#008080",	
+        Blue:		"#0000FF",	
+        Navy:		"#000080",	
+        Fuchsia:	"#FF00FF",	
+        Purple:		"#800080"
+    };
+    var colorReserved = {
+        White:		"#FFFFFF",
+        Silver:		"#C0C0C0",	
+        Gray:		"#808080",	
+        Black:		"#000000"	
+    };
 
 	var game = new Phaser.Game(config);
 
@@ -59,28 +81,29 @@ function main(){
 		var displayHeight = this.cameras.main.displayHeight;
 		
 		// finds the number of px on each side of play area
-		var horizontalOffset = (displayWidth - (squarePx * squareWidth))/2;
+		var horizontalOffset = squarePxHalf + (displayWidth - (squarePx * squareWidth))/2;
 		
 		// finds the number of px on each side of play area, sans alloted openspace at top
-		var verticalOffset = ((displayHeight - verticalOpenSpace) - (squarePx * squareHeight))/2;
+		var verticalOffset = squarePxHalf + ((displayHeight - verticalOpenSpace) - (squarePx * squareHeight))/2;
 		var verticalOffsetTop = verticalOpenSpace + verticalOffset;
         
         console.log(displayWidth,displayHeight,horizontalOffset,verticalOffset,verticalOffsetTop);
 		
 		
 // 		this.squares = this.physics.add.group();
-		for (var i = 0; i < 9; i++) {
-			var x = i * squarePx + 22;
-			var y = i * squarePx + verticalOffsetTop;
+		for (var i = 0; i < squareWidth; i++) {
+            for (var j = 0; j < squareHeight; j++) {
+                var x = i * squarePx + horizontalOffset;
+                var y = j * squarePx + verticalOffsetTop;
 
-// 			var square = this.squares.create(x, y, 'square');
-            console.log(i,x,y);
-//             this.square.setInteractive();
-            
-            var square = this.add.sprite(x,y, 'square').setInteractive();
-            square.i = i;
+                console.log(i,x,y);
 
-
+                var square = this.add.sprite(x,y, 'square').setInteractive();
+                square.i = i;
+                square.j = j;
+                
+                square.setTint(randomColor(colorPlay));
+            }
 		}
 
 
@@ -90,24 +113,12 @@ function main(){
 
         //  Events
 
-        this.input.on('gameobjectdown', function (pointer, gameObject) {
+        this.input.on('gameobjectdown', squareDown);
 
-            gameObject.setTint(0x00ff00);
-            console.log(gameObject);
+        this.input.on('gameobjectout', squareOut);
 
-        });
-
-        this.input.on('gameobjectout', function (pointer, gameObject) {
-
-            gameObject.clearTint();
-
-        });
-
-        this.input.on('gameobjectup', function (pointer, gameObject) {
-
-            gameObject.clearTint();
-
-        });
+        this.input.on('gameobjectup', squareUp);
+        
 	    //  Input Events
 	    cursors = this.input.keyboard.createCursorKeys();
 
@@ -122,13 +133,24 @@ function main(){
 
 	}
     
-    function squareClicked(ptr,obj)
+    function squareDown(ptr,obj)
     {
-//         gameObject.angle+=10;
-        console.log(obj.i, obj.body.x, obj.body.y, obj);
+        obj.setTint(0x00ff00);
+        console.log(obj);
+    }    
+    function squareOut(ptr,obj)
+    {
+        console.log(obj);
+    }    
+    function squareUp(ptr,obj)
+    {
+        console.log(obj);
     }
 
-
+    var randomColor = function (obj) {
+        var keys = Object.keys(obj)
+        return obj[keys[ keys.length * Math.random() << 0]];
+    };
 }
 
 
