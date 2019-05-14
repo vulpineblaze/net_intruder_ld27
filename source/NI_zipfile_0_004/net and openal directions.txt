@@ -1,0 +1,2 @@
+This game requires .NET Framework 4.0 and OpenAL installed.
+Both should be packaged with the installer. If you have any problems or crashes, ensure these are both installed first, please. 
