@@ -70,7 +70,7 @@ function main(){
 		
 // 		this.squares = this.physics.add.group();
 		for (var i = 0; i < 9; i++) {
-			var x = i * squarePx + horizontalOffset + 22;
+			var x = i * squarePx + 22;
 			var y = i * squarePx + verticalOffsetTop;
 
 // 			var square = this.squares.create(x, y, 'square');
