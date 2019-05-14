@@ -93,7 +93,7 @@ function main(){
         this.input.on('gameobjectdown', function (pointer, gameObject) {
 
             gameObject.setTint(0x00ff00);
-            console.log(gameObject.i, gameObject.body.x, gameObject.body.y, gameObject);
+            console.log(gameObject);
 
         });
 
