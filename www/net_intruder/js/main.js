@@ -153,7 +153,7 @@ function main(){
             game.scale.pageAlignHorizontally = true;
             game.scale.pageAlignVertically = true;
         }
-// 		thisGame = this;
+		thisGame = this;
 	    //  A simple background for our game
 	    rainbow_center = this.add.image(0, 0, 'rainbow_center');
 	    rainbow_center.setDisplayOrigin(0);
