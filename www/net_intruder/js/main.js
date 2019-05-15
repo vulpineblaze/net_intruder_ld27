@@ -142,7 +142,7 @@ function main(){
 		console.log("desktop:",this.sys.game.device.os.desktop);
         if (this.sys.game.device.os.desktop == false) {
             // Set the scaling mode to SHOW_ALL to show all the game
-            var scaler = new ScaleManager(game);
+            var scaler = new Phaser.Scale.ScaleManager(game);
             console.log(Phaser.Scale,game,game.scale, this, this.scale,scaler);
             game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 
