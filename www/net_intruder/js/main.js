@@ -14,7 +14,7 @@ function main(){
 		scale: {
             mode: Phaser.Scale.FIT,
             parent: 'net_intruder',
-            autoCenter: Phaser.Scale.CENTER_BOTH,
+            autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
             width: 600,
             height: 850
         },
