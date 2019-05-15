@@ -9,6 +9,7 @@ function main(){
 
 	var config = {
 	    type: Phaser.AUTO,
+        parent: 'net_intruder',
 	    width: 600,
 	    height: 850,
 		scale: {
