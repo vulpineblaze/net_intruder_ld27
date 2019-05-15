@@ -12,11 +12,11 @@ function main(){
 	    width: 600,
 	    height: 850,
 		scale: {
-            parent: 'net_intruder',
+//             parent: 'net_intruder',
             mode: Phaser.Scale.FIT,
-            autoCenter: Phaser.Scale.CENTER_BOTH,
-            width: 600,
-            height: 850
+            autoCenter: Phaser.Scale.CENTER_BOTH
+//             width: 600,
+//             height: 850
         },
 	    physics: {
 	        default: 'arcade',
