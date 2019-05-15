@@ -140,7 +140,7 @@ function main(){
 	{
         // If this is not a desktop (so it's a mobile device) 
 		console.log("desktop:",this.sys.game.device.os.desktop);
-        if (game.device.desktop == false) {
+        if (this.sys.game.device.os.desktop == false) {
             // Set the scaling mode to SHOW_ALL to show all the game
             game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 
