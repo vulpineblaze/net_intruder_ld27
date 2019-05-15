@@ -9,8 +9,15 @@ function main(){
 
 	var config = {
 	    type: Phaser.AUTO,
-	    width: 600,
-	    height: 850,
+// 	    width: 600,
+// 	    height: 850,
+		scale: {
+            parent: 'yourgamediv',
+            mode: Phaser.Scale.FIT,
+            autoCenter: Phaser.Scale.CENTER_BOTH,
+            width: 600,
+            height: 850
+        },
 	    physics: {
 	        default: 'arcade',
 	        arcade: {
