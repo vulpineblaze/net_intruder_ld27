@@ -9,15 +9,15 @@ function main(){
 
 	var config = {
 	    type: Phaser.AUTO,
-	    width: 600,
-	    height: 850,
-// 		scale: {
-// //             parent: 'net_intruder',
-//             mode: Phaser.Scale.FIT,
-//             autoCenter: Phaser.Scale.CENTER_BOTH
-// //             width: 600,
-// //             height: 850
-//         },
+// 	    width: 600,
+// 	    height: 850,
+		scale: {
+            mode: Phaser.Scale.FIT,
+            parent: 'net_intruder',
+            autoCenter: Phaser.Scale.CENTER_BOTH,
+            width: 600,
+            height: 850
+        },
 	    physics: {
 	        default: 'arcade',
 	        arcade: {
@@ -139,23 +139,23 @@ function main(){
 	function create ()
 	{
         // If this is not a desktop (so it's a mobile device) 
-		console.log("desktop:",this.sys.game.device.os.desktop);
-        if (this.sys.game.device.os.desktop == false) {
-            // Set the scaling mode to SHOW_ALL to show all the game
-            var scaler = Phaser.ScaleManager;
-            console.log(Phaser.Scale,game,game.scale, this, this.scale,scaler);
-            game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+// 		console.log("desktop:",this.sys.game.device.os.desktop, game.device.desktop);
+//         if (this.sys.game.device.os.desktop == false) {
+//             // Set the scaling mode to SHOW_ALL to show all the game
+//             var scaler = Phaser.ScaleManager;
+//             console.log(Phaser.Scale,game,game.scale, this, this.scale,scaler);
+//             game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 
-            // Set a minimum and maximum size for the game
-            // Here the minimum is half the game size
-            // And the maximum is the original game size
-            game.scale.setMinMax(game.width/2, game.height/2, 
-                game.width, game.height);
+//             // Set a minimum and maximum size for the game
+//             // Here the minimum is half the game size
+//             // And the maximum is the original game size
+//             game.scale.setMinMax(game.width/2, game.height/2, 
+//                 game.width, game.height);
 
-            // Center the game horizontally and vertically
-            game.scale.pageAlignHorizontally = true;
-            game.scale.pageAlignVertically = true;
-        }
+//             // Center the game horizontally and vertically
+//             game.scale.pageAlignHorizontally = true;
+//             game.scale.pageAlignVertically = true;
+//         }
 		thisGame = this;
 	    //  A simple background for our game
 	    rainbow_center = this.add.image(0, 0, 'rainbow_center');
