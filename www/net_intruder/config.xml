@@ -57,8 +57,8 @@
     <plugin name="cordova-plugin-console" />
     <plugin name="cordova-plugin-contacts" />
     <plugin name="cordova-plugin-device" />
-    <plugin name="cordova-plugin-device-motion" />
-    <plugin name="cordova-plugin-device-orientation" />
+    <!-- <plugin name="cordova-plugin-device-motion" />
+    <plugin name="cordova-plugin-device-orientation" /> -->
     <plugin name="cordova-plugin-dialogs" />
     <plugin name="cordova-plugin-file" />
     <plugin name="cordova-plugin-file-transfer" />
@@ -93,17 +93,17 @@
     <icon src="ico/icon.png" gap:platform="winphone"   gap:role="background" />
 
     <!-- Define app splash screen for each platform. -->
-    <gap:splash src="ico/icon.png"       gap:platform="android" gap:qualifier="port-ldpi" />
-    <gap:splash src="ico/icon.png"       gap:platform="android" gap:qualifier="port-mdpi" />
-    <gap:splash src="ico/icon.png"       gap:platform="android" gap:qualifier="port-hdpi" />
-    <gap:splash src="ico/icon.png"      gap:platform="android" gap:qualifier="port-xhdpi" />
-    <gap:splash src="ico/icon.png"              gap:platform="blackberry" />
-    <gap:splash src="ico/icon.png"         gap:platform="ios"     width="320" height="480" />
-    <gap:splash src="ico/icon.png"      gap:platform="ios"     width="640" height="960" />
-    <gap:splash src="ico/icon.png" gap:platform="ios"     width="640" height="1136" />
-    <gap:splash src="ico/icon.png"           gap:platform="ios"     width="768" height="1024" />
-    <gap:splash src="ico/icon.png"          gap:platform="ios"     width="1024" height="768" />
-    <gap:splash src="ico/icon.png"      gap:platform="winphone" />
+    <splash src="ico/icon.png"       gap:platform="android" gap:qualifier="port-ldpi" />
+    <splash src="ico/icon.png"       gap:platform="android" gap:qualifier="port-mdpi" />
+    <splash src="ico/icon.png"       gap:platform="android" gap:qualifier="port-hdpi" />
+    <splash src="ico/icon.png"      gap:platform="android" gap:qualifier="port-xhdpi" />
+    <splash src="ico/icon.png"              gap:platform="blackberry" />
+    <splash src="ico/icon.png"         gap:platform="ios"     width="320" height="480" />
+    <splash src="ico/icon.png"      gap:platform="ios"     width="640" height="960" />
+    <splash src="ico/icon.png" gap:platform="ios"     width="640" height="1136" />
+    <splash src="ico/icon.png"           gap:platform="ios"     width="768" height="1024" />
+    <splash src="ico/icon.png"          gap:platform="ios"     width="1024" height="768" />
+    <splash src="ico/icon.png"      gap:platform="winphone" />
 
     <gap:config-file platform="ios" parent="CFBundleShortVersionString">
     <string>100</string>
