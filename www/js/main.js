@@ -1,16 +1,19 @@
-<!-- hide script from old browsers
-
-
-
 
 function main(){
     
 
 
 	var config = {
-	    type: Phaser.AUTO,
-	    width: 600,
-	    height: 850,
+	    type: Phaser.WEBGL,
+// 	    width: 600,
+// 	    height: 850,
+		scale: {
+            mode: Phaser.Scale.FIT,
+            parent: 'net_intruder',
+            autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
+            width: 600,
+            height: 850
+        },
 	    physics: {
 	        default: 'arcade',
 	        arcade: {
@@ -115,6 +118,7 @@ function main(){
 
 	function preload ()
 	{
+	    this.load.image('overlay', 'img/overlay.png');
 	    this.load.image('square', 'img/squares_faded_square.png');
 	    this.load.image('home', 'img/squares_white_outline.png');
 	    this.load.image('end', 'img/squares_black_outline.png');
@@ -127,10 +131,32 @@ function main(){
         this.load.audio('dead', 'audio/dead.wav');
         this.load.audio('click', 'audio/click.wav');
 
+        var url;
+        url = 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/plugins/dist/rexroundrectangleplugin.min.js';
+        this.load.plugin('rexroundrectangleplugin', url, true);    
+
 	}
 
 	function create ()
 	{
+        // If this is not a desktop (so it's a mobile device) 
+// 		console.log("desktop:",this.sys.game.device.os.desktop, game.device.desktop);
+//         if (this.sys.game.device.os.desktop == false) {
+//             // Set the scaling mode to SHOW_ALL to show all the game
+//             var scaler = Phaser.ScaleManager;
+//             console.log(Phaser.Scale,game,game.scale, this, this.scale,scaler);
+//             game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+
+//             // Set a minimum and maximum size for the game
+//             // Here the minimum is half the game size
+//             // And the maximum is the original game size
+//             game.scale.setMinMax(game.width/2, game.height/2, 
+//                 game.width, game.height);
+
+//             // Center the game horizontally and vertically
+//             game.scale.pageAlignHorizontally = true;
+//             game.scale.pageAlignVertically = true;
+//         }
 		thisGame = this;
 	    //  A simple background for our game
 	    rainbow_center = this.add.image(0, 0, 'rainbow_center');
@@ -168,7 +194,7 @@ function main(){
 		verticalOffset = squarePxHalf + ((displayHeight - verticalOpenSpace) - (squarePx * squareHeight))/2;
 		verticalOffsetTop = verticalOpenSpace + verticalOffset;
         
-        console.log(displayWidth,displayHeight,horizontalOffset,verticalOffset,verticalOffsetTop);
+        // console.log(displayWidth,displayHeight,horizontalOffset,verticalOffset,verticalOffsetTop);
 		
 		
 
@@ -197,7 +223,7 @@ function main(){
 
 	    //  The score
 	    movesText = this.add.text(40, 40, movesTextPrefix + moves, { fontSize: '48px', fill: '#fff' });
-	    console.log(movesText);
+	    console.log("movesText: ",movesText);
 
 	    winText = this.add.text(160, 80, winTextMsg , { fontSize: '48px', fill: '#fff' });
 	    loseText = this.add.text(160, 80, loseTextMsg , { fontSize: '48px', fill: '#fff' });
@@ -257,7 +283,7 @@ function main(){
     function squareDown(ptr,obj)
     {
         // obj.setTint(0x00ff00);
-        console.log(gameState);
+        console.log("squareDown: ",gameState);
         if(gameState=="start" && !checkForReClick(obj)){
         	var color = getTint(obj);
 	       	sfxClick.play();
@@ -297,8 +323,8 @@ function main(){
     	for (k=0;k<homeSquares.length;k++){
     		var hs = homeSquares[k];
     		var condition = true;
-    		hs.setTint(color);
-    		console.log("hs", getTint(hs), color);
+    		hs.setFillStyle(color);
+    		// console.log("hs", getTint(hs), color);
     		while(condition){
     			condition = checkSidesForColor(hs.i,hs.j,getTint(hs));
     		}
@@ -329,7 +355,7 @@ function main(){
 				console.log("WIN");
 			}
 			if(getTint(sq) == color && !homeSquares.includes(sq) ){
-				console.log("sq",getTint(sq), color, homeSquares.includes(sq) );
+				// console.log("sq",getTint(sq), color, homeSquares.includes(sq) );
 
 				homeSquares.push(sq);
 				checkSidesForColor(sq.i, sq.j, color);
@@ -348,7 +374,7 @@ function main(){
     	homeOutline.setVisible(true);
     	homeOutline.setDepth(home.depth + 1);
 
-    	home.setTint(colorReserved.White);
+    	home.setFillStyle(colorReserved.White);
     	homeSquares.push(home);
     }
     function chooseEnd(){
@@ -356,7 +382,7 @@ function main(){
     	var row = getRandomInt(0,squareWidth-1);
     	end = fieldArray[row][col];
     	// var outline = this.add.sprite(home.body.x,home.body.y, 'home');
-    	end.setTint(colorReserved.Black);
+    	end.setFillStyle(colorReserved.Black);
     	// homeSquares.push(home);
     }
 
@@ -367,13 +393,13 @@ function main(){
 	}
 
 	function getTint(obj){
-		return obj.tintBottomLeft;
+		return obj.fillColor;
 	}
 
 	function setMoves(val){
-		console.log(moves, val);
+		// console.log(moves, val);
 		moves = moves + val;
-	    console.log(movesText);
+	    // console.log(movesText);
 
 	    movesText.setText(movesTextPrefix + moves);
 	    if(moves == 0){
@@ -407,7 +433,7 @@ function main(){
 		restartText.setVisible(true);
 		homeOutline.setVisible(false);
 		gameState = "wait";
-		console.log(type, gameState, colorPickTally);
+		// console.log(type, gameState, colorPickTally);
 
 	}
 	function changeToFreshGame(){
@@ -434,18 +460,47 @@ function main(){
 
                 // console.log(i,x,y);
 
-                var square = thisGame.add.sprite(x,y, 'square').setInteractive();
+                // var square = thisGame.add.sprite(x,y, 'square').setInteractive();
+                // var square = thisGame.add.rectangle(x,y, 60,60, colorReserved.Gray).setInteractive();
+                var square = thisGame.add.rexRoundRectangle(x,y, 58,58, 16, colorReserved.Gray).setInteractive();
+                // var square = new Phaser.GameObject.Rectangle(x,y, 60,60, colorReserved.Gray);
+                // square.setInteractive();
+                // var square = new Phaser.Geom.Rectangle(250, 200, 300, 200);
                 square.i = i;
                 square.j = j;
                 
-                square.setTint(randomColor(colorPlay));
+                square.setFillStyle(randomColor(colorPlay));
                 square.name = i+"|"+j;
+
+                square.overlay = thisGame.add.sprite(x,y, 'overlay').setAlpha(0.5);
+
 
                 fieldArray[i].push(square);
             }
 		}
 
-		console.log(fieldArray);
+        // fieldArray[1][1].overlay = thisGame.add.sprite(x,y, 'square').setAlpha(0.3);
+		console.log("fieldArray.1.1",fieldArray[1][1]);
+		// console.log("Game board color test:: ");
+		// console.log(getTint(fieldArray[getRandomInt(0,squareWidth-1)][getRandomInt(0,squareHeight-1)]));
+		// console.log(getTint(fieldArray[getRandomInt(0,squareWidth-1)][getRandomInt(0,squareHeight-1)]));
+		// console.log(getTint(fieldArray[getRandomInt(0,squareWidth-1)][getRandomInt(0,squareHeight-1)]));
+		
+
+
+		// console.log("testForLog::");
+		// var testForLog = fieldArray[getRandomInt(0,squareWidth-1)][getRandomInt(0,squareHeight-1)];
+
+		// console.log(getTint(testForLog));
+  //   	// testForLog.setTintFill(colorReserved.Lime);
+  //   	testForLog.setTint(colorReserved.Lime);
+
+		// // console.log(colorReserved.Lime); //0x00FF00
+		// console.log(getTint(testForLog));
+
+		// console.log(0x00FF00); //0x00FF00
+		// console.log(getTint(testForLog));
+		// // console.log(fieldArray);
 
 		chooseHome();
 		chooseEnd();
@@ -465,11 +520,8 @@ function main(){
 	function determineMovesStart(){
 		var col = Math.abs(home.i - end.i);
 		var row = Math.abs(home.j - end.j);
-		console.log(col,row);
+		// console.log(col,row);
 		return row + col + movesDifficultyOffset;
 	}
 }
 
-
-
-// end hiding script from old browsers -->
