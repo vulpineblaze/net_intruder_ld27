@@ -32,12 +32,16 @@ function main(){
 	    }
 	};
 
+	var game = new Phaser.Game(config);
+
+	
+
 	var player;
 	var cursors;
 	var gameOver = false;
 	var moves=0;
 	var movesText="";
-	var movesTextPrefix = "Moves Left: ";
+	var movesTextPrefix = "Moves: ";
 	var movesUpdate=0;
 	var movesDifficultyOffset = 5;
 
@@ -49,6 +53,9 @@ function main(){
     var muteKey;
     var isMute;
 
+    var level=1;
+    var levelText="";
+    var levelTextPrefix = "Level: ";
 
 	var square;
 	var squares;
@@ -60,6 +67,11 @@ function main(){
 	var hasClicked = false;
 	var home;
 	var end;
+	var bomb;
+
+	var staticAlphaStill = 0.3
+	var staticAlphaActive = 0.6;
+	var bombAlphaActive = 0.8;
 
 	var black_center;
 	var white_center;
@@ -114,11 +126,12 @@ function main(){
     var gameState = "start";
     var thisGame;
 
-	var game = new Phaser.Game(config);
+	
 
 	function preload ()
 	{
-	    this.load.image('overlay', 'img/overlay.png');
+    	this.load.spritesheet('overlays', 'img/overlays.png', { frameWidth: 60, frameHeight: 60 });
+    	this.load.spritesheet('bombs', 'img/bombs.png', { frameWidth: 60, frameHeight: 60 });
 	    this.load.image('square', 'img/squares_faded_square.png');
 	    this.load.image('home', 'img/squares_white_outline.png');
 	    this.load.image('end', 'img/squares_black_outline.png');
@@ -126,7 +139,6 @@ function main(){
 	    this.load.image('white_center', 'img/backgrounds_white_center.png');
 	    this.load.image('rainbow_center', 'img/backgrounds_rainbow1.png');
 	    this.load.image('teal_border', 'img/backgrounds_teal_border.png');
-	    this.load.image('end', 'img/squares_black_outline.png');
         this.load.audio('music', ['audio/net_intruder_music_001.ogg', 'audio/net_intruder_music_001.mp3']);
         this.load.audio('dead', 'audio/dead.wav');
         this.load.audio('click', 'audio/click.wav');
@@ -222,15 +234,37 @@ function main(){
 
 
 	    //  The score
-	    movesText = this.add.text(40, 40, movesTextPrefix + moves, { fontSize: '48px', fill: '#fff' });
+	    movesText = this.add.text(40, 40, movesTextPrefix + moves, { fontFamily: 'Impact', fontSize: '48px', fill: '#fff' });
 	    console.log("movesText: ",movesText);
 
+	    levelText = this.add.text(400, 40, levelTextPrefix + level, { fontFamily: 'Impact', fontSize: '48px', fill: '#fff' });
+	    // console.log("movesText: ",movesText);
+
 	    winText = this.add.text(160, 80, winTextMsg , { fontSize: '48px', fill: '#fff' });
-	    loseText = this.add.text(160, 80, loseTextMsg , { fontSize: '48px', fill: '#fff' });
+	    loseText = this.add.text(horizontalOffset, 80, loseTextMsg , { align: 'center', fontSize: '48px', fill: '#fff', wordWrap: {width: displayWidth - (horizontalOffset*2)} });
 	    restartText = this.add.text(60, 780, restartTextMsg, { fontSize: '48px', fill: '#fff' });
 	    winText.setVisible(false);
 	    loseText.setVisible(false);
 	    restartText.setVisible(false);
+
+
+	    this.anims.create({
+		    key: 'static',
+		    frames: this.anims.generateFrameNumbers('overlays', { start: 0, end: 5 }),
+		    frameRate: 10,
+		    yoyo: true,
+		    repeat: -1
+		});
+
+	    this.anims.create({
+		    key: 'wick',
+		    frames: this.anims.generateFrameNumbers('bombs', { start: 0, end: 5 }),
+		    frameRate: 10,
+		    yoyo: true,
+		    repeat: -1
+		});
+
+
 
         createGame();
 	}
@@ -315,6 +349,14 @@ function main(){
         return obj[keys[ len * Math.random() << 0]];
     };
 
+    function checkSpecialSquare(obj){
+    	if(obj.name == bomb.name){
+    		loseText.text = loseTextMsg + "\nYou absorbed The Bomb!";
+    		// loseText.setText("\nYou absorbed The Bomb!");
+    		gameState = "lose";
+    	}
+    }
+
     function checkHomeSides (color){
     	var k=0;
     	if(color == colorReserved.Black){
@@ -356,7 +398,10 @@ function main(){
 			}
 			if(getTint(sq) == color && !homeSquares.includes(sq) ){
 				// console.log("sq",getTint(sq), color, homeSquares.includes(sq) );
+	       		checkSpecialSquare(sq);
 
+    			sq.overlay.setAlpha(staticAlphaActive);
+				sq.overlay.anims.play('static', true);
 				homeSquares.push(sq);
 				checkSidesForColor(sq.i, sq.j, color);
 				isUpdated = true
@@ -375,6 +420,8 @@ function main(){
     	homeOutline.setDepth(home.depth + 1);
 
     	home.setFillStyle(colorReserved.White);
+    	home.overlay.anims.play('static', true);
+    	home.overlay.setAlpha(staticAlphaActive);
     	homeSquares.push(home);
     }
     function chooseEnd(){
@@ -384,6 +431,25 @@ function main(){
     	// var outline = this.add.sprite(home.body.x,home.body.y, 'home');
     	end.setFillStyle(colorReserved.Black);
     	// homeSquares.push(home);
+    }
+    function chooseBomb(){
+    	var pick = true;
+    	var col , row;
+    	while(pick){
+    		col = getRandomInt(0,2);
+    		row = getRandomInt(0,squareWidth-1);
+    		console.log(col, row, end);
+    		if(col != end.i && row != end.j){
+    			pick = false;
+    		}
+    	}
+
+    	bomb = fieldArray[row][col];
+    	// var outline = this.add.sprite(home.body.x,home.body.y, 'home');
+        bomb.overlay = thisGame.add.sprite(bomb.x, bomb.y, 'bombs');
+
+		bomb.overlay.anims.play('wick', true);
+    	bomb.overlay.setAlpha(bombAlphaActive);    	// homeSquares.push(home);
     }
 
 	function getRandomInt(min, max) {
@@ -418,6 +484,7 @@ function main(){
 		if(type=="win"){
 			winText.setVisible(true);
 			movesDifficultyOffset = movesDifficultyOffset - 1;
+			level += 1;
 			if(colorPickTally == colorPickThreshold){
 				colorPickTally = 0;
 				colorAvailable = colorAvailable + 1;
@@ -472,7 +539,7 @@ function main(){
                 square.setFillStyle(randomColor(colorPlay));
                 square.name = i+"|"+j;
 
-                square.overlay = thisGame.add.sprite(x,y, 'overlay').setAlpha(0.5);
+                square.overlay = thisGame.add.sprite(x,y, 'overlays').setAlpha(staticAlphaStill);
 
 
                 fieldArray[i].push(square);
@@ -504,6 +571,7 @@ function main(){
 
 		chooseHome();
 		chooseEnd();
+		chooseBomb();
 
 		setMoves(determineMovesStart());
 	}
