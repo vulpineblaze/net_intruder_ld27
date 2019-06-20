@@ -1,5 +1,5 @@
-# Project Name
-> Here goes your awesome project description!
+# Net Intruder
+> color-matching puzzle game originally for LD#27, now as it's own game to be expanded upon.
 
 ## Table of contents
 * [General info](#general-info)
@@ -14,48 +14,47 @@
 * [Contact](#contact)
 
 ## General info
-Add more general information about project. What the purpose of the project is? Motivation?
-Put possible docs / coda link here.
+I originally made this game to saitify my own curiousity about the game mechanics. After a few years, I came back to it to see if I could take it to the next level. 
+
+[Project documentation on coda.io](https://coda.io/d/Master-Project-List-FBD_ddKUgkxSKaN/Net-Intruder_suPIl#_lu01L)
+
+[Demo site](http://fusionbombsderp.com/net_intruder/)
+
 
 ## Screenshots
-![Example screenshot](./img/screenshot.png)
+![Game Play Screen](./source/screenshot_6-20-19.PNG)
 
 ## Technologies
-* Tech 1 - version 1.0
-* Tech 2 - version 2.0
-* Tech 3 - version 3.0
+* Phaser 3 - version 3.17.0
+* Phonegap - version 7.1.0
 
 ## Setup
-Describe how to install / setup your local environement / add link to demo version.
+It's a client side javascript frameowrk, should run out of any web server from `/var/www/net_intruder/`without installation.
 
 ### Requirements
-If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+Phaser 3, linked through CDN.
 
 ### Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Code Examples
-Show examples of usage:
-`put-your-code-here`
+Load via browser and play per instructions!
 
 ## Features
 List of features ready and TODOs for future development
-* Awesome feature 1
-* Awesome feature 2
-* Awesome feature 3
+* Base game mechanics fully playable on all browsers
+* Exports to Android apk
+* Basic level and new square types added
 
 To-do list:
-* Wow improvement to be done 1
-* Wow improvement to be done 2
+* Add all outlined square types
+* Finish level algorithm to accomdate them all
 
 ## Status
-Project is: _in progress_, _finished_, _no longer continue_ and why?
+Project is: _in progress_, waiting completion of higher priority tasks.
 
 ## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+Looking to collaborate on art, and can always use more play testers. Head over to the github [issue tracker](https://github.com/vulpineblaze/net_intruder_ld27/issues/new) to report anything amiss. 
 
 ## Inspiration
-Add here credits. Project inspired by..., based on...
+I spent years believing this game existed, and that I had played it as a child. I couldn't find it in my adult life and dediced then to create it. 
 
 ## Contact
 Created by [@vulpineblaze](https://github.com/vulpineblaze) - feel free to contact me!
