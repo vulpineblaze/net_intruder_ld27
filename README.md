@@ -29,7 +29,7 @@ I originally made this game to saitify my own curiousity about the game mechanic
 * Phonegap - version 7.1.0
 
 ## Setup
-It's a client side javascript frameowrk, should run out of any web server from `/var/www/net_intruder/`without installation.
+It's a client side javascript framework, should run out of any web server from `/var/www/net_intruder/` without any further installation.
 
 ### Requirements
 Phaser 3, linked through CDN.
@@ -38,7 +38,6 @@ Phaser 3, linked through CDN.
 Load via browser and play per instructions!
 
 ## Features
-List of features ready and TODOs for future development
 * Base game mechanics fully playable on all browsers
 * Exports to Android apk
 * Basic level and new square types added
@@ -46,9 +45,10 @@ List of features ready and TODOs for future development
 To-do list:
 * Add all outlined square types
 * Finish level algorithm to accomdate them all
+* Acquire Apple Developer license and export app to iOS. 
 
 ## Status
-Project is: _in progress_, waiting completion of higher priority tasks.
+Project is: _in progress_, awaiting completion of higher priority tasks.
 
 ## Contributing
 Looking to collaborate on art, and can always use more play testers. Head over to the github [issue tracker](https://github.com/vulpineblaze/net_intruder_ld27/issues/new) to report anything amiss. 
