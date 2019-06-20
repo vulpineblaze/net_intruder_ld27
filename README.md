@@ -1,5 +1,5 @@
 # Net Intruder
-> color-matching puzzle game originally for LD#27, now as it's own game to be expanded upon.
+> Color-matching puzzle game originally for the [Ludum Dare Game Competition (LD#27)](https://ldjam.com/about), now as it's own game to be expanded upon.
 
 ## Table of contents
 * [General info](#general-info)
@@ -14,7 +14,7 @@
 * [Contact](#contact)
 
 ## General info
-I originally made this game to saitify my own curiousity about the game mechanics. After a few years, I came back to it to see if I could take it to the next level. 
+I originally made this game to satisfy my own curiousity about the game mechanics. After a few years, I came back to it to see if I could take it to the next level. 
 
 [Project documentation on coda.io](https://coda.io/d/Master-Project-List-FBD_ddKUgkxSKaN/Net-Intruder_suPIl#_lu01L)
 
