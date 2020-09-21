@@ -44,12 +44,14 @@ NT.Squares = {
 	squareDown: function (ptr,obj)
 	{
 	    var isReClick = false;
+	    var isAdjClickable = false;
 	    console.log(this,NT.Squares);
+	    console.log("JG_DEBUG: squareDown: ptr,obj : ",ptr,obj);
 		if(NT.Squares.getTint(obj) == NT.Squares.getTint(home)){
 			isReClick = true;
 		}
 
-	    if( !isReClick ) {
+	    if( !isReClick &&  NT.Squares.checkAdjSquaresAreHomeClickable(obj) ) {
 	    	var color = NT.Squares.getTint(obj);
 	       	sfxClick.play();
 	       	NT.Squares.checkHomeSides(color);
@@ -109,10 +111,53 @@ NT.Squares = {
 		if (NT.Squares.checkAdjSquares(i,j+1,color)) isUpdated = true; //down
 		return isUpdated;
 	},
+	checkAdjSquaresAreHomeClickable: function (obj){
+		var i = obj.i;
+		var j = obj.j;
+		var isAdjClickable = false;
+		if(i >= 0 && i < NT.Globals.squareWidth 
+			&& j >=0 && j < NT.Globals.squareHeight
+			&& this.fieldArray 
+			&& this.fieldArray.length >= i 
+			&& this.fieldArray[i].length >= j ){
+
+			// console.log("fieldArray",this.fieldArray);
+			if(i-1 >= 0){
+				var sqL = this.fieldArray[i-1][j];
+				if(this.homeSquares.includes(sqL)){
+					isAdjClickable = true;
+				}
+			}
+			if(i+1 < NT.Globals.squareWidth ){
+				var sqR = this.fieldArray[i+1][j];
+				if(this.homeSquares.includes(sqR)){
+					isAdjClickable = true;
+				}
+			}
+			if(j-1 >= 0){
+				var sqT = this.fieldArray[i][j-1];
+				if(this.homeSquares.includes(sqT)){
+					isAdjClickable = true;
+				}
+			}
+			if(j+1 < NT.Globals.squareHeight){
+				var sqB = this.fieldArray[i][j+1];
+				if(this.homeSquares.includes(sqB)){
+					isAdjClickable = true;
+				}
+			}
+		}
+		return isAdjClickable;
+	},
 	checkAdjSquares: function (i,j, color){
 		var isUpdated = false;
-		if(i >= 0 && i < NT.Globals.squareWidth && j >=0 && j < NT.Globals.squareHeight){
-			console.log("fieldArray",this.fieldArray);
+		if(i >= 0 && i < NT.Globals.squareWidth 
+			&& j >=0 && j < NT.Globals.squareHeight
+			&& this.fieldArray 
+			&& this.fieldArray.length >= i 
+			&& this.fieldArray[i].length >= j ){
+
+			// console.log("fieldArray",this.fieldArray);
 			var sq = this.fieldArray[i][j];
 
 			if(NT.Squares.getTint(sq) == this.colorReserved.Black){
@@ -162,7 +207,7 @@ NT.Squares = {
 		while(pick){
 			col = NT.Squares.getRandomInt(0,2);
 			row = NT.Squares.getRandomInt(0,NT.Globals.squareWidth-1);
-			console.log(col, row, end);
+			// console.log("col, row, end : ", col, row, end);
 			if(col != end.i && row != end.j){
 				pick = false;
 			}

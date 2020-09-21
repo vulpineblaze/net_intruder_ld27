@@ -29,7 +29,11 @@ NT.Scenes.Intro = new Phaser.Class({
     preload: function ()
     {
 	    this.load.image('teal_border', 'img/backgrounds_teal_border.png');
-	    this.load.image('black_center', 'img/backgrounds_black_center.png');
+        this.load.image('black_center', 'img/backgrounds_black_center.png');
+
+        this.load.image('home_snip', 'img/home_snip.png');
+        this.load.image('end_snip', 'img/end_snip.png');
+	    this.load.image('bomb_snip', 'img/bomb_snip.png');
     },
 
     create: function ()
@@ -40,8 +44,24 @@ NT.Scenes.Intro = new Phaser.Class({
     	var black_center = this.add.sprite(0,0, 'black_center').setInteractive();
 	    black_center.setDisplayOrigin(0);
 
+        var home_snip = this.add.image(NT.Globals.horizontalOffset, 2 * NT.Globals.squarePx + NT.Globals.verticalOffsetTop, 'home_snip');
+        home_snip.setDisplayOrigin(0);
+        var end_snip = this.add.image(NT.Globals.horizontalOffset, 4 * NT.Globals.squarePx + NT.Globals.verticalOffsetTop, 'end_snip');
+        end_snip.setDisplayOrigin(0);
+        var bomb_snip = this.add.image(NT.Globals.horizontalOffset, 6 * NT.Globals.squarePx + NT.Globals.verticalOffsetTop, 'bomb_snip');
+        bomb_snip.setDisplayOrigin(0);
+
 
         this.add.text(160, 80, NT.Messages.introTextMsg, { font: '48px Impact', fill: '#fff' });
+        // console.log("JG_DEBUG: snip:", home_snip);
+        var textOffset = {x:2 * NT.Globals.squarePx,y:0.2 * NT.Globals.squarePx}
+        var style = { font: '24px Impact', fill: '#fff', align: 'left', wordWrap: { width: NT.Globals.gameWidth * 0.6 }};
+
+    // var text = game.add.text(game.world.centerX, game.world.centerY, "phaser with a sprinkle of pixi dust", style);
+        this.add.text(home_snip.x + textOffset.x, home_snip.y + textOffset.y, NT.Messages.homeSnipTextMsg, style);
+        this.add.text(end_snip.x + textOffset.x, end_snip.y + textOffset.y, NT.Messages.endSnipTextMsg, style);
+        this.add.text(bomb_snip.x + textOffset.x, bomb_snip.y + textOffset.y, NT.Messages.bombSnipTextMsg, style);
+
 
 
         this.input.once('pointerup', function () {
