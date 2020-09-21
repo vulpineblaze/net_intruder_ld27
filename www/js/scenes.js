@@ -210,9 +210,12 @@ NT.Scenes.Play = new Phaser.Class({
         this.load.audio('dead', 'audio/dead.wav');
         this.load.audio('click', 'audio/click.wav');
 
-        var url;
-        url = 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/plugins/dist/rexroundrectangleplugin.min.js';
-        this.load.plugin('rexroundrectangleplugin', url, true); 
+        // this.load.plugin('RandomNamePlugin', 'assets/loader-tests/RandomNamePlugin.js', true);
+        // var url;
+        // // url = 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/plugins/dist/rexroundrectangleplugin.min.js';
+        // url = 'js/rexroundrectangleplugin.min.js';
+        // this.load.plugin('rexroundrectangleplugin', url, true); 
+        this.load.plugin('rexroundrectangleplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexroundrectangleplugin.min.js', true);
     },
 
 
