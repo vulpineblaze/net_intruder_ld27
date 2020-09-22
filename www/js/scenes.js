@@ -115,7 +115,7 @@ NT.Scenes.Win = new Phaser.Class({
 	    		wordWrap: {width: NT.Globals.gameWidth - (NT.Globals.horizontalOffset*2)} 
 	    	});
         // this.add.text(40, 80, NT.Messages.winTextMsg + this.inText, { align: 'center', font: '48px Impact', fill: '#fff' });
-	    this.add.text(60, 780, NT.Messages.restartTextMsg, { align: 'center', font: '48px Impact', fill: '#fff' });
+	    this.add.text(60, 780, NT.Messages.nextLevelTextMsg+NT.Globals.level+"!", { align: 'center', font: '48px Impact', fill: '#fff' });
 
 
         var fullClick = false;
@@ -243,8 +243,10 @@ NT.Scenes.Play = new Phaser.Class({
     {
         thisGame = this;
 	    //  A simple background for our game
-	    rainbow_center = this.add.image(0, 0, 'rainbow_center');
-	    rainbow_center.setDisplayOrigin(0);
+	    rainbow_center = this.add.image(-NT.Globals.horzThird , -NT.Globals.vertThird , 'rainbow_center');
+        rainbow_center.setDisplayOrigin(0);
+	    rainbow_center.setScale(4);
+
 	    teal_border = this.add.image(0, 0, 'teal_border');
 	    teal_border.setDisplayOrigin(0);
 
@@ -342,6 +344,21 @@ NT.Scenes.Play = new Phaser.Class({
 	    	console.log("Pressed One!");
 	        NT.Squares.setMoves(1-NT.Globals.moves);
 	    }
+
+        if(rainbow_center.x > -NT.Globals.horzThird 
+                || rainbow_center.x < NT.Globals.gameWidth * -(rainbow_center.scale-1.33)){
+            NT.Globals.bgShiftX *= -1;
+            // rainbow_center.x *= 0.9;
+        }else if(rainbow_center.y > -NT.Globals.vertThird 
+                || rainbow_center.y < NT.Globals.gameHeight * -(rainbow_center.scale-1.33)){
+            NT.Globals.bgShiftY *= -1;
+        }else{
+
+        }
+
+        rainbow_center.setPosition(rainbow_center.x + NT.Globals.bgShiftX, 
+                                    rainbow_center.y + NT.Globals.bgShiftY);
+        console.log("rainbow_center",rainbow_center.x,rainbow_center.y);
 
     },
 

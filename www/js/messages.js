@@ -17,6 +17,7 @@ NT.Messages = {
     introTextMsg:   "Click to play!!",
     winTextMsg:   "You Won!",
     loseTextMsg:   "You Lost!",
+    nextLevelTextMsg:   "Click to start level ",
     restartTextMsg:   "Click to restart!"
 };
 

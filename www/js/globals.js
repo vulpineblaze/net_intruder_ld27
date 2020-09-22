@@ -9,7 +9,7 @@ NT.Globals = {
 	moves: 0,
 
 	movesUpdate: 0,
-	movesDifficultyOffset: 5,
+	movesDifficultyOffset: -1,
 
 	musicMax: 0.6,
 	musicVolume: 0.6,
@@ -19,6 +19,8 @@ NT.Globals = {
 	squareHeight: 12,
 	verticalOpenSpace: 80,
 
+	bgShiftX: -6,
+	bgShiftY: -8,
 
 	level: 1
 };
@@ -35,5 +37,8 @@ NT.Globals.verticalOffset = NT.Globals.squarePxHalf
 				- (NT.Globals.squarePx * NT.Globals.squareHeight))/2;
 
 NT.Globals.verticalOffsetTop = NT.Globals.verticalOpenSpace + NT.Globals.verticalOffset;	
+
+NT.Globals.horzThird = NT.Globals.gameWidth * 0.33;
+NT.Globals.vertThird = NT.Globals.gameHeight * 0.33;
 
 
